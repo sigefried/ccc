@@ -1,22 +1,27 @@
 #! /bin/bash
 
-dir_name=$2
-local_dir=${HOME}/tmp/${1}
-hadoop_input=/home/m/IdeaProjects/hadoop/input
+read id dir_name
+local_dir=/home/ubuntu/tmp/${id}
+hadoop_input=/input
 
-echo "create tmp dir $local_dir..."
+echo "local_dir: $local_dir}" 1>&2
+echo "id: ${local_dir}"
+
+
+echo "create tmp dir $local_dir..." 1>&2
 mkdir -p ${local_dir}
 
-echo "copy the data from master to tmp..."
+echo "copy the data from master to tmp..." 1>&2
 scp -r localhost:${dir_name}/* ${local_dir}
 
+
 for f in ${local_dir}/*.zip; do
-	echo "process file $f..."
-	./prepare_input.py $f
-	echo "dump file to hdfs ... "
-	cp ${f%.zip}.bz2 $hadoop_input/
+	echo "process file $f..." 1>&2
+	/home/ubuntu/capstone/misc/prepare_input.py $f
+	echo "dump file to hdfs ... " 1>&2
+	$HADOOP_HOME/bin/hadoop fs -put ${f%.zip}.bz2 $hadoop_input/
 done
 
-echo "DONE"
+echo "DONE" 1>&2
 
 

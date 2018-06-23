@@ -1,0 +1,4 @@
+/home/m/Dropbox/cloud-computing-capstone/sample-data/2005
+/home/m/Dropbox/cloud-computing-capstone/sample-data/2006
+/home/m/Dropbox/cloud-computing-capstone/sample-data/2007
+/home/m/Dropbox/cloud-computing-capstone/sample-data/2008
