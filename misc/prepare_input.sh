@@ -12,12 +12,12 @@ echo "create tmp dir $local_dir..." 1>&2
 mkdir -p ${local_dir}
 
 echo "copy the data from master to tmp..." 1>&2
-scp -r localhost:${dir_name}/* ${local_dir}
+scp -r master:${dir_name}/* ${local_dir}
 
 
 for f in ${local_dir}/*.zip; do
 	echo "process file $f..." 1>&2
-	/home/ubuntu/capstone/misc/prepare_input.py $f
+	/home/ubuntu/ccc/misc/prepare_input.py $f
 	echo "dump file to hdfs ... " 1>&2
 	$HADOOP_HOME/bin/hadoop fs -put ${f%.zip}.bz2 $hadoop_input/
 done

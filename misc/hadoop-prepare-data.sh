@@ -10,4 +10,4 @@ hadoop jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-*.jar \
 -input /directories.txt \
 -inputformat org.apache.hadoop.mapred.lib.NLineInputFormat \
 -output /import_output \
--mapper /home/ubuntu/capstone/misc/prepare_input.sh
+-mapper /home/ubuntu/ccc/misc/prepare_input.sh
