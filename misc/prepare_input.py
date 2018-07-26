@@ -10,7 +10,9 @@ target_cols = [
         'FlightNum',
         'Origin',
         'Dest',
+        'DepTime',
         'DepDelay',
+        'ArrTime',
         'ArrDelay'
         ]
 
