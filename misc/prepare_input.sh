@@ -4,6 +4,7 @@ read id dir_name
 local_dir=/home/ubuntu/tmp/${id}
 hadoop_input=/input
 
+
 echo "local_dir: $local_dir}" 1>&2
 echo "id: ${local_dir}"
 
@@ -19,7 +20,7 @@ for f in ${local_dir}/*.zip; do
 	echo "process file $f..." 1>&2
 	/home/ubuntu/ccc/misc/prepare_input.py $f
 	echo "dump file to hdfs ... " 1>&2
-	$HADOOP_HOME/bin/hadoop fs -put ${f%.zip}.bz2 $hadoop_input/
+	/home/ubuntu/hadoop-2.9.1/bin/hdfs dfs -put ${f%.zip}.bz2 $hadoop_input/
 done
 
 echo "DONE" 1>&2
