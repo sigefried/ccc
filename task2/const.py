@@ -1,5 +1,5 @@
 BootStarpServers = "localhost:9092"
-zookeepers="localhost:2181"
+zookeepers = "localhost:2181"
 TopicName = "performance"
 TimeOut = 3
 FLIGHT_DATE_COL = 0
@@ -12,8 +12,7 @@ DEPDELAY_COL = 6
 ARRTIME_COL = 7
 ARRDELAY_COL = 8
 
-KafkaParams = { "bootstrap.servers" : BootStarpServers,
-        "auto.offset.reset" : "smallest",
-        "group.id" : "ccc-group2"
-        }
-
+KafkaParams = {"bootstrap.servers": BootStarpServers,
+               "auto.offset.reset": "smallest",
+               "group.id": "ccc-group2"
+               }
