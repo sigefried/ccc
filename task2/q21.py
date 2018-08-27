@@ -51,7 +51,7 @@ if __name__ == '__main__':
         print("-----------------------------------------------")
 
     def save_to_dynamoDB(partition):
-        dynamodb = boto3.resource('dynamodb')
+        dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
         table = dynamodb.Table('q21')
         print("start processing partition...")
         pq_map = defaultdict(list)

@@ -16,9 +16,9 @@ def input_preporcess(line):
     if fields[FLIGHT_DATE_COL] == 'FlightDate' or fields[DEPDELAY_COL] == '':
         return None
     origin = str(fields[ORIGIN_COL])
-    carrier = str(fields[UNIQUECARRIER_COL])
+    dest = str(fields[DEST_COL])
     dep_delay = float(fields[DEPDELAY_COL])
-    return ((origin, carrier), dep_delay)
+    return ((origin, dest), dep_delay)
 
 
 def updateFunction(newValues, runningCount):
@@ -51,20 +51,22 @@ if __name__ == '__main__':
         print("-----------------------------------------------")
 
     def save_to_dynamoDB(partition):
-        dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-        table = dynamodb.Table('q22')
+        # dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+        # table = dynamodb.Table('q22')
         print("start processing partition...")
         pq_map = defaultdict(list)
         for rec in partition:
             airport = rec[0][0]
-            carrier = rec[0][1]
+            dest = rec[0][1]
             avg_dep_delay = rec[1][0] / rec[1][1]
             pq = pq_map[airport]
-            heapq.heappush(pq,(-avg_dep_delay, carrier))
+            heapq.heappush(pq,(-avg_dep_delay, dest))
             if len(pq) > 10: 
                 heapq.heappop(pq)
         
         for k, pq in pq_map.items():
+            for it in pq:
+                print("%s %s %f" % (k, it[1], -it[0]))
 
         # with table.batch_writer() as batch:
         #     for k, pq in pq_map.items():
