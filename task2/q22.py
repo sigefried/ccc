@@ -51,8 +51,8 @@ if __name__ == '__main__':
         print("-----------------------------------------------")
 
     def save_to_dynamoDB(partition):
-        # dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-        # table = dynamodb.Table('q22')
+        dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+        table = dynamodb.Table('q22')
         print("start processing partition...")
         pq_map = defaultdict(list)
         for rec in partition:
@@ -64,18 +64,14 @@ if __name__ == '__main__':
             if len(pq) > 10: 
                 heapq.heappop(pq)
         
-        for k, pq in pq_map.items():
-            for it in pq:
-                print("%s %s %f" % (k, it[1], -it[0]))
-
-        # with table.batch_writer() as batch:
-        #     for k, pq in pq_map.items():
-        #         for it in pq:
-        #             batch.put_item(Item={
-        #                 "airport": k,
-        #                 "carrier": it[1],
-        #                 "avg_dep_delay": Decimal(str(-it[0]))
-        #             })
+        with table.batch_writer() as batch:
+            for k, pq in pq_map.items():
+                for it in pq:
+                    batch.put_item(Item={
+                        "origin": k,
+                        "dest": it[1],
+                        "avg_dep_delay": Decimal(str(-it[0]))
+                    })
         print("partition processing finished...")
 
     lines = kvs.map(lambda x: x[1])
