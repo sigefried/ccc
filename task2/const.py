@@ -1,7 +1,7 @@
-#BootStarpServers = "localhost:9092"
-BootStarpServers = "ip-172-30-0-10.ec2.internal:9092"
-#zookeepers = "localhost:2181"
-zookeepers = "ip-172-30-0-10.ec2.internal:2181,ip-172-30-0-59.ec2.internal:2181,ip-172-30-0-156.ec2.internal:2181"
+BootStarpServers = "localhost:9092"
+zookeepers = "localhost:2181"
+# BootStarpServers = "ip-172-30-0-10.ec2.internal:9092"
+# zookeepers = "ip-172-30-0-10.ec2.internal:2181,ip-172-30-0-59.ec2.internal:2181,ip-172-30-0-156.ec2.internal:2181"
 TopicName = "performance"
 TimeOut = 3
 FLIGHT_DATE_COL = 0
