@@ -65,8 +65,7 @@ if __name__ == '__main__':
     # key logic
     def processRDD(rdd):
         print("start processing rdd...")
-        rdd.foreach(print)
-        # rdd.foreachPartition(save_to_dynamoDB)
+        rdd.foreachPartition(save_to_dynamoDB)
         print("rdd processed...")
         print("-----------------------------------------------")
 
@@ -76,11 +75,16 @@ if __name__ == '__main__':
         print("start processing partition...")
         with table.batch_writer() as batch:
             for rec in partition:
-                avg_arr_dealy = str(rec[1][0] / rec[1][1])
-                src_dest = rec[0]
+                print(rec)
+                src_dest = rec[0][0] + "_" + rec[0][1]
+                date = rec[0][2]
+                flight = rec[1][1]
+                arr_delay = rec[1][0]
                 batch.put_item(Item={
                     "src_dest": src_dest,
-                    "avg_arr_delay": Decimal(avg_arr_dealy)
+                    "date" : date,
+                    "flight": flight,
+                    "arr_delay": Decimal(arr_delay)
                 })
         print("partition processing finished...")
 
