@@ -4,23 +4,23 @@ import pprint
 from boto3.dynamodb.conditions import Key, Attr
 
 pairs = [
-    [
-        ('BOS', 'ATL', '2008-04-03', 'AM'),
-   	    ('ATL', 'LAX', '2008-04-05', 'PM')
-    ],
-   	# [
-    #     ('PHX', 'JFK', '2008-09-07', 'AM'),
-	#     ('JFK', 'MSP', '2008-09-09', 'PM')
-    # ],
-   	# [
-    #     ('DFW', 'STL', '2008-01-24', 'AM'),
-	#     ('STL', 'ORD', '2008-01-26', 'PM')
-    # ],
-   	# [
-    #     ('LAX', 'MIA', '2008-05-16', 'AM'),
-	#     ('MIA', 'LAX', '2008-05-18', 'PM')
-    # ]
-]
+        [
+            ('BOS', 'ATL', '2008-04-03', 'AM'),
+            ('ATL', 'LAX', '2008-04-05', 'PM')
+            ],
+        [
+            ('PHX', 'JFK', '2008-09-07', 'AM'),
+            ('JFK', 'MSP', '2008-09-09', 'PM')
+            ],
+        [
+            ('DFW', 'STL', '2008-01-24', 'AM'),
+            ('STL', 'ORD', '2008-01-26', 'PM')
+            ],
+        [
+            ('LAX', 'MIA', '2008-05-16', 'AM'),
+            ('MIA', 'LAX', '2008-05-18', 'PM')
+            ]
+        ]
 
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 table = dynamodb.Table('q32')
